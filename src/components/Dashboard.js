@@ -31,8 +31,8 @@ const classes = useStyles();
             <Table>
                 <TableHead>
                     <TableRow className={classes.bold}>
-                        <TableCell>Currency Trading Shortcuts</TableCell>
-                        <TableCell>Buy Orders Shortcuts</TableCell>
+                        <TableCell>Recipe Name</TableCell>
+                        <TableCell>Rating</TableCell>
                     </TableRow>
                 </TableHead>
             </Table>

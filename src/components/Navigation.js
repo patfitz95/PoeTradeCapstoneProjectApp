@@ -21,7 +21,7 @@ render() {
         <AppBar position="relative">
             <Toolbar>
                 <Typography variant="h6" style={{ flexGrow: "1" }}>
-                   Path of Exile Trade App
+                   Recipe Sharing App
                 </Typography>
                 <ul className="nav-list">
                         <Button color='inherit'><Link to="/Search">Search</Link></Button>
