@@ -21,9 +21,10 @@ render() {
         <AppBar position="relative">
             <Toolbar>
                 <Typography variant="h6" style={{ flexGrow: "1" }}>
-                   Recipe Sharing App
+                   Recipe Finder
                 </Typography>
                 <ul className="nav-list">
+                        <Button color='inherit'><Link to="/SignUp">SignUp</Link></Button>
                         <Button color='inherit'><Link to="/Search">Search</Link></Button>
 
                     {
@@ -41,7 +42,7 @@ render() {
                             <Button color='inherit'>Logout</Button>
                             </Link>
                             : 
-                            <Button color='inherit'><Link to="/">Login</Link></Button>
+                            <Button color='inherit'><Link to="/Login">Login</Link></Button>
                         }
 
                 </ul>
@@ -50,7 +51,7 @@ render() {
             <Container>
             {
                 cookies["loggedIn"] ?  
-                    <h4>Welcome  {cookies['Username']}</h4>
+                    <h4>Welcome  {cookies['Username']}!</h4>
                 : null
             }
             </Container>

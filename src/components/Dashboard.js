@@ -28,14 +28,6 @@ const classes = useStyles();
         <Container maxWidth="lg" className="car-container">
             <div className="flex-container">
             </div>
-            <Table>
-                <TableHead>
-                    <TableRow className={classes.bold}>
-                        <TableCell>Recipe Name</TableCell>
-                        <TableCell>Rating</TableCell>
-                    </TableRow>
-                </TableHead>
-            </Table>
         </Container>
     )
 }

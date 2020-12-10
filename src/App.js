@@ -3,7 +3,6 @@ import Navigation from './components/Navigation'
 import './App.css'
 import Router from './Router'
 import { BrowserRouter } from 'react-router-dom'
-import Fetch from './components/Fetch'
 //import { Provider } from 'react-redux'
 //import store from './redux/store'
 
@@ -15,7 +14,6 @@ function App() {
       <BrowserRouter>
         <Navigation />
         <Router />
-        <Fetch />
       </BrowserRouter>
     </div>
   );

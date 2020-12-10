@@ -4,31 +4,44 @@ import cookie from 'cookie'
 import Dashboard from './components/Dashboard'
 import Login from './components/Login'
 import Search from './components/Search'
+import Signup from './components/SignUp'
+import {connect} from 'react-redux'
 
 const checkAuth = () => {
-    const cookies = cookie.parse(document.cookie)
-    return cookies["loggedIn"] ? true : false
+    const token = localStorage.getItem('token');
+  return token;
 }
 
-const ProtectedRoute = ({component: Component, ...rest}) => {
+const ProtectedRoute = ({ component: Component, ...rest }) => {
     return (
-        <Route
+      <Route
         {...rest}
-        render={(props) => checkAuth()
-            ? <Component {...props} />
-            : <Redirect to="/login" />}
-        />
-    )
-}
+        render={(props) =>
+          checkAuth() ? <Component {...props} /> : <Redirect to="/Login" />
+        }
+      />
+    );
+  };
 
-const Router = () => {
+const Router = (props) => {
     return (
+        <div>
+        {props.loggedIn ? <p>Logged In</p> : <p>Test</p>}
         <Switch>
-            <Route exact path="/" component={Login} />
+            <Route exact path="/" component={Search} />
+            <Route exact path="/SignUp" component={Signup} />
+            <Route exact path="/Login" component={Login} />
             <Route exact path="/Search" component={Search} />
             <ProtectedRoute path="/Dashboard" component={Dashboard} />
         </Switch>
+        </div>
     );
 };
 
-export default Router;
+const mapStateToProps = (state) => {
+    console.log('state :', state);
+    return {
+      loggedIn: state.loggedIn,
+    };
+  };
+  export default connect(mapStateToProps, null)(Router);

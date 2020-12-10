@@ -6,10 +6,10 @@ import {
   Grid
 } from '@material-ui/core'
   
-  class Login extends Component {
+  class Signup extends Component {
       state = {
           username: '',
-          password: ''
+          password: '',
         }
         
         handleTextChange = (e) => {
@@ -18,11 +18,12 @@ import {
             this.setState(state)
         }
         
-        login = (e) => {
+        signup = (e) => {
             e.preventDefault()
             document.cookie = "loggedIn=true;max-age=60*1000"
-            document.cookie = "Username=" +  this.state.username + ";max-age=60*1000"
+            document.cookie = "Create Username=" +  this.state.username + ";max-age=60*1000"
             window.location.replace("/search")
+            this.props.signUp(this.state);
             
         }
         
@@ -40,7 +41,7 @@ import {
         alignItems="center"
         >
 
-          <form className="login-form" onSubmit={this.login}>
+          <form className="login-form" onSubmit={this.signup}>
             <Grid item>
             <TextField
               required
@@ -66,7 +67,7 @@ import {
               className="login-button"
               variant="contained"
               fullWidth
-              color="default">Login</Button>
+              color="default">SignUp</Button>
               </Grid>
           </form>
               </Grid>
@@ -78,11 +79,9 @@ import {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    login: (data) => {
-      dispatch(login(data));
+    signUp: (data) => {
+      dispatch(signUp(data));
     },
   };
 };
-export default connect(null, mapDispatchToProps)(LoginScreen);
-
-export default Login;
+export default connect(null, mapDispatchToProps)(SignUp)
