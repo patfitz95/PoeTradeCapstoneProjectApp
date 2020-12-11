@@ -8,9 +8,9 @@ const { handleSQLError } = require('../sql/error');
 const saltRounds = 10;
 const signup = (req, res) => {
   const { username, password } = req.body;
-  console.log('username password', email, password);
+  console.log('username password', password);
   let sql =
-    'INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)';
+    'INSERT INTO users (username, password) VALUES (?, ?)';
 
   bcrypt.hash(password, saltRounds, function (err, hash) {
     console.log('hash:', hash);
@@ -27,34 +27,19 @@ const signup = (req, res) => {
   });
 };
 
+
 const login = (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
+  let sql = "SELECT * FROM users WHERE userName = ?";
+  sql = mysql.format(sql, [username]);
 
-  axios(`https://${process.env.AUTH0_DOMAIN}/oauth/token`, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    data: {
-      grant_type: 'password',
-      password: password,
-      audience: process.env.AUTH0_IDENTITY,
-      connection: 'Username-Password-Authentication',
-      scope: 'openid',
-      client_id: process.env.AUTH0_CLIENT_ID,
-      client_secret: process.env.AUTH0_CLIENT_SECRET,
-    },
-  })
-    .then((response) => {
-      const { access_token } = response.data;
-      res.json({
-        access_token,
-      });
-    })
-    .catch((e) => {
-      res.send(e);
-    });
-
+  pool.query(sql, (err, rows) => {
+    if (err) {
+      return handleSQLError(res, err);
+    }
+    if (!rows.length) {
+      return res.status(404).send("No matching users");
+    }
   pool.query(sql, (err, rows) => {
     if (err) return handleSQLError(res, err);
     if (!rows.length) return res.status(404).send('No matching users');
@@ -70,10 +55,12 @@ const login = (req, res) => {
       res.json({
         msg: 'Login successful',
         token,
+        username : username,
       });
     });
   });
-};
+});
+}
 
 module.exports = {
   signup,

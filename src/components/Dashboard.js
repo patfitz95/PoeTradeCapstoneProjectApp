@@ -2,9 +2,9 @@ import React from 'react'
 import {
     Container,
     Table,
-    TableCell,
     TableHead,
-    TableRow
+    TableRow,
+    TableCell,
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Dashboard = (props) => {
+const Dashboard = () => {
 
 const classes = useStyles();
 
@@ -28,6 +28,14 @@ const classes = useStyles();
         <Container maxWidth="lg" className="car-container">
             <div className="flex-container">
             </div>
+            <Table>	
+                <TableHead>	
+                    <TableRow className={classes.bold}>	
+                        <TableCell>Recipe Name</TableCell>	
+                        <TableCell>Rating</TableCell>	
+                    </TableRow>	
+                </TableHead>	
+            </Table>
         </Container>
     )
 }

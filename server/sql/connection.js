@@ -9,7 +9,7 @@ class Connection {
         host: '35.239.60.179',
         user: 'root',
         password: 'HappyToast333',
-        database: 'mygoogledatabase'
+        database: 'users'
       })
 
       return this.pool

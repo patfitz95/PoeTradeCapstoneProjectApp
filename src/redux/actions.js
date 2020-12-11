@@ -5,7 +5,7 @@ export const signUp = (data) => {
   console.log('data:', data);
   return function (dispatch) {
     axios
-      .post('http://localhost:4001/auth/signup', {
+      .post('/auth/signup', {
         username: data.username,
         password: data.password
       })
@@ -32,11 +32,12 @@ const signUpFailure = (err) => {
 export const login = (data) => {
   return function (dispatch) {
     axios
-      .post('http://localhost:4001/auth/login', {
+      .post('/auth/login', {
         username: data.username,
         password: data.password,
       })
-      .then((res) => dispatch(loginSuccess(res)))
+      .then((res) =>
+       dispatch(loginSuccess(res)))
       .catch((err) => {
         dispatch(loginFailure(err));
       });

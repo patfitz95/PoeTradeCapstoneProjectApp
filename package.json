@@ -2,7 +2,7 @@
   "name": "poetradeapp",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "proxy": "http://localhost:4001",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -14,8 +14,10 @@
     "cookie": "^0.4.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "js": "^0.1.0",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
+    "node": "^15.3.0",
     "proxy": "^1.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -24,7 +26,10 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
+    "server": "^1.0.31",
+    "types": "^0.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,5 +51,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "author": "",
+  "license": "ISC"
 }

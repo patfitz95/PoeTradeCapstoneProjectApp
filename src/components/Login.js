@@ -5,6 +5,8 @@ import {
   Container,
   Grid
 } from '@material-ui/core'
+import { connect } from 'react-redux';
+import { login } from '../redux/actions';
   
   class Login extends Component {
       state = {
@@ -20,9 +22,7 @@ import {
         
         login = (e) => {
             e.preventDefault()
-            document.cookie = "loggedIn=true;max-age=60*1000"
-            document.cookie = "Username=" +  this.state.username + ";max-age=60*1000"
-            window.location.replace("/search")
+            this.props.login(this.state);
             
         }
         
@@ -83,6 +83,4 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-export default connect(null, mapDispatchToProps)(LoginScreen);
-
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);

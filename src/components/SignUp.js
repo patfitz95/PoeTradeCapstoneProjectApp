@@ -5,8 +5,10 @@ import {
   Container,
   Grid
 } from '@material-ui/core'
+import { connect } from 'react-redux';
+import { signUp } from '../redux/actions';
   
-  class Signup extends Component {
+  class SignUp extends Component {
       state = {
           username: '',
           password: '',
@@ -20,9 +22,6 @@ import {
         
         signup = (e) => {
             e.preventDefault()
-            document.cookie = "loggedIn=true;max-age=60*1000"
-            document.cookie = "Create Username=" +  this.state.username + ";max-age=60*1000"
-            window.location.replace("/search")
             this.props.signUp(this.state);
             
         }

@@ -4,7 +4,6 @@ import cookie from 'cookie'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 
-
 const cookies = cookie.parse(document.cookie)
 
 class Navigation extends Component {
@@ -28,16 +27,16 @@ render() {
                         <Button color='inherit'><Link to="/Search">Search</Link></Button>
 
                     {
-                    cookies["loggedIn"] ?  
+                    document.cookie["loggedIn=true"] ?  
 
                         <Button color='inherit'><Link to="/Dashboard">Dashboard</Link></Button>
                     : null
                     }
                         {
-                            cookies["loggedIn"] ?  
+                            cookies["loggedIn=true"] ?  
                             <Link onClick={() => {
                             document.cookie = "loggedIn="
-                            window.location.replace("/login")
+                            window.location.replace("/")
                             }}>
                             <Button color='inherit'>Logout</Button>
                             </Link>
@@ -51,7 +50,7 @@ render() {
             <Container>
             {
                 cookies["loggedIn"] ?  
-                    <h4>Welcome  {cookies['Username']}!</h4>
+                    <h4>Welcome  {cookies['username']}!</h4>
                 : null
             }
             </Container>
@@ -59,5 +58,5 @@ render() {
     )
     }
 }
-
-export default Navigation
+  
+  export default Navigation;

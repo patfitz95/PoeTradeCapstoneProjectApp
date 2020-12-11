@@ -1,6 +1,5 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router'
-import cookie from 'cookie'
 import Dashboard from './components/Dashboard'
 import Login from './components/Login'
 import Search from './components/Search'
@@ -26,13 +25,13 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 const Router = (props) => {
     return (
         <div>
-        {props.loggedIn ? <p>Logged In</p> : <p>Test</p>}
+        {props.loggedIn}
         <Switch>
-            <Route exact path="/" component={Search} />
+            <Route exact path="/" component={Login} />
             <Route exact path="/SignUp" component={Signup} />
             <Route exact path="/Login" component={Login} />
             <Route exact path="/Search" component={Search} />
-            <ProtectedRoute path="/Dashboard" component={Dashboard} />
+            <ProtectedRoute exact path="/Dashboard" component={Dashboard} />
         </Switch>
         </div>
     );
