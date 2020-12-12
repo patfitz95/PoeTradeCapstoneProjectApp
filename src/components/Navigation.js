@@ -6,11 +6,30 @@ import Button from '@material-ui/core/Button';
 
 
 class Navigation extends Component {
+  
+  state = {
+    isLoggedIn: false
+  }
+  componentDidMount() {
+    setInterval(()=> {
+      const cookies = cookie.parse(document.cookie)
+    if (cookies.loggedIn ==='true') {
 
-cookies = cookie.parse(document.cookie)
+      this.setState ({isLoggedIn: true})
+    } else {
+      this.setState ({isLoggedIn: false})
+    }
+    }, 250)
+  }
+  // componentDidUpdate() {
+  //   console.log('isLoggedIn', this.state.isLoggedIn)
+  // }
+
+  
 render() {
-    const cookies = cookie.parse(document.cookie)
+  const cookies = cookie.parse(document.cookie)
     return (
+      
     <Container>
         <AppBar position="relative">
             <Toolbar>
@@ -20,42 +39,31 @@ render() {
                 <ul className="nav-list">
                         <Button color='inherit'><Link to="/SignUp">SignUp</Link></Button>
                         <Button color='inherit'><Link to="/Search">Search</Link></Button>
-                        <Button color='inherit'><Link to="/Login">Login</Link></Button>
-
-                    {cookies.loggedIn && (
+                        {!this.state.isLoggedIn &&(<Button color='inherit'><Link to="/Login">Login</Link></Button>)}
+                    {this.state.isLoggedIn && (
         <div>
         
           <Button
-            color='inherit'
-            onClick={() => {
-              window.location.assign("/Dashboard");
-            }}
-          >
-            {" "}
-            Dashboard{" "}
+            color='inherit' 
+            >
+            <Link to="/Dashboard">Dashboard</Link>
+
           </Button>
-          <Button
+          <Link to="/Login"><Button
             color='inherit'
             onClick={() => {
               document.cookie = "loggedIn=";
-              window.location.assign("/");
             }}
           >
-            {" "}
-            Sign Out{" "}
+            Log Out
           </Button>
+          </Link>
         </div>
       )}
                 </ul>
             </Toolbar>
         </AppBar>
-            <Container>
-            {
-                cookies["loggedIn"] ?  
-                    <h4>Welcome  {cookies['username']}!</h4>
-                : null
-            }
-            </Container>
+            
     </Container>
     )
     }

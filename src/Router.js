@@ -5,10 +5,11 @@ import Login from './components/Login'
 import Search from './components/Search'
 import Signup from './components/SignUp'
 import {connect} from 'react-redux'
+import cookie from 'cookie'
 
 const checkAuth = () => {
-    const token = localStorage.getItem('token');
-  return token;
+  const cookies = cookie.parse(document.cookie)
+  return cookies.loggedIn ==='true'
 }
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
