@@ -8,6 +8,7 @@ const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 4001;
+app.use(express.static("build"));
 
 // const publicPath = path.join(__dirname, '..', 'client/build');
 
@@ -16,7 +17,7 @@ app.use(bodyParser.json());
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 // app.use(express.static(publicPath));
-app.use(express.static("build"));
+
 
 app.get('/', (req, res) => {
   res.send('Welcome to our server!');
