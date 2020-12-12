@@ -1,7 +1,9 @@
 {
   "name": "poetradeapp",
   "version": "0.1.0",
-  "engines": {"node": "12.x"},
+  "engines": {
+    "node": "12.x"
+  },
   "private": true,
   "proxy": "http://localhost:4001",
   "dependencies": {
