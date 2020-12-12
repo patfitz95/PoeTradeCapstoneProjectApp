@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 // app.use(express.static(publicPath));
-app.use(express.static("build"));
+app.use(express.static(__dirname, "build"));
 
 app.get('/', (req, res) => {
   res.send('Welcome to our server!');
