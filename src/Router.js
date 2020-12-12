@@ -24,16 +24,13 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 
 const Router = (props) => {
     return (
-        <div>
-        {props.loggedIn}
         <Switch>
             <Route exact path="/" component={Login} />
-            <Route exact path="/SignUp" component={Signup} />
-            <Route exact path="/Login" component={Login} />
-            <Route exact path="/Search" component={Search} />
+            <Route path="/SignUp" component={Signup} />
+            <Route path="/Login" component={Login} />
+            <Route path="/Search" component={Search} />
             <ProtectedRoute exact path="/Dashboard" component={Dashboard} />
         </Switch>
-        </div>
     );
 };
 

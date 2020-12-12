@@ -4,17 +4,12 @@ import cookie from 'cookie'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 
-const cookies = cookie.parse(document.cookie)
 
 class Navigation extends Component {
 
-logout = () => {
-console.log(`logging out`)
-document.cookie = "loggedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-document.cookie = "Username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-}
-
+cookies = cookie.parse(document.cookie)
 render() {
+    const cookies = cookie.parse(document.cookie)
     return (
     <Container>
         <AppBar position="relative">
@@ -25,25 +20,32 @@ render() {
                 <ul className="nav-list">
                         <Button color='inherit'><Link to="/SignUp">SignUp</Link></Button>
                         <Button color='inherit'><Link to="/Search">Search</Link></Button>
+                        <Button color='inherit'><Link to="/Login">Login</Link></Button>
 
-                    {
-                    document.cookie["loggedIn=true"] ?  
-
-                        <Button color='inherit'><Link to="/Dashboard">Dashboard</Link></Button>
-                    : null
-                    }
-                        {
-                            cookies["loggedIn=true"] ?  
-                            <Link onClick={() => {
-                            document.cookie = "loggedIn="
-                            window.location.replace("/")
-                            }}>
-                            <Button color='inherit'>Logout</Button>
-                            </Link>
-                            : 
-                            <Button color='inherit'><Link to="/Login">Login</Link></Button>
-                        }
-
+                    {cookies.loggedIn && (
+        <div>
+        
+          <Button
+            color='inherit'
+            onClick={() => {
+              window.location.assign("/Dashboard");
+            }}
+          >
+            {" "}
+            Dashboard{" "}
+          </Button>
+          <Button
+            color='inherit'
+            onClick={() => {
+              document.cookie = "loggedIn=";
+              window.location.assign("/");
+            }}
+          >
+            {" "}
+            Sign Out{" "}
+          </Button>
+        </div>
+      )}
                 </ul>
             </Toolbar>
         </AppBar>

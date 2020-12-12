@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Redirect} from 'react-router-dom'
 import {
   TextField,
   Button,
@@ -7,11 +8,22 @@ import {
 } from '@material-ui/core'
 import { connect } from 'react-redux';
 import { login } from '../redux/actions';
+import axios from 'axios';
   
   class Login extends Component {
       state = {
           username: '',
-          password: ''
+          password: '',
+          redirectHome: null
+        }
+
+        componentDidUpdate(prevProps, prevState) {
+          if (prevProps.loginLoading && !this.props.loginLoading) {
+            if (this.props.msg) {
+              // trigger re render with History
+              this.props.history.push('/Dashboard');
+            }
+          }
         }
         
         handleTextChange = (e) => {
@@ -20,13 +32,22 @@ import { login } from '../redux/actions';
             this.setState(state)
         }
         
-        login = (e) => {
+        login = async (e)  => {
             e.preventDefault()
-            this.props.login(this.state);
-            
+            await axios.post("/auth/login", {username: this.state.username, password: this.state.password}).then(res => {
+              document.cookie = "loggedIn=true"
+              
+            })
+            this.setState({
+              redirectHome: true
+            })
         }
         
+        // this.state.redirectHome {
+        //   return <Redirect to="/Search"/>
+        // }
         render() {
+          
             return (
                 <div className="App">
                     <Container maxWidth='sm'>
@@ -71,6 +92,7 @@ import { login } from '../redux/actions';
           </form>
               </Grid>
               </Container>
+              { this.state.redirectHome && <Redirect to="/Search"/>}
       </div>
     );
 }

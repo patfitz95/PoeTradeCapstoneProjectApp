@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-
 import ACTION_TYPES from './types';
 
 const loggedIn = (state = '', action) => {
